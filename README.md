@@ -6,7 +6,7 @@ Project can run with using docker-compose.yml on docker container.
 
 I preferred jdk 1.8 for development. 
 
-For accessing and testing easily services "interview.postman_collection.json" postman collection can use which shared in this repo.
+For accessing and testing webservices easily "interview.postman_collection.json" postman collection can use which shared in this repo.
 
 Project meets this requirement.
 
