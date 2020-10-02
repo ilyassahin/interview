@@ -1,0 +1,4 @@
+server:
+    port: 9000
+orderserviceuri: http://localhost:9200
+customerserviceuri: http://localhost:9100
