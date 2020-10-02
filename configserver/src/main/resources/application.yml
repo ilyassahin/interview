@@ -1,0 +1,15 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+       git:
+        uri: https://github.com/ilyassahin/interview
+    profiles:
+      active: native
+management:
+  security:
+    enabled: false
