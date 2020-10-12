@@ -17,6 +17,7 @@
         <module>customerservice</module>
         <module>gateway</module>
         <module>orderservice</module>
+        <module>discoveryserver</module>
     </modules>
 
 </project>
