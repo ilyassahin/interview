@@ -10,3 +10,7 @@ spring:
         console:
             enabled: true
 customerserviceuri: http://localhost:9100/customer/checkCreditLimit
+eureka:
+    client:
+        service-url:
+            defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
