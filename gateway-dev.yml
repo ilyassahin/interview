@@ -2,3 +2,7 @@ server:
     port: 9000
 orderserviceuri: http://localhost:9200
 customerserviceuri: http://localhost:9100
+eureka:
+    client:
+        service-url:
+            defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
