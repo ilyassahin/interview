@@ -11,8 +11,8 @@ spring:
       - id: customerroute
         uri: lb://customerservice
         predicates:
-        - Path=/order/**
+        - Path=/customer/**
       - id: orderroute
         uri: lb://orderservice
         predicates:
-        - Path=/customer/**
+        - Path=/order/**
