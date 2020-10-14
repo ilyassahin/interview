@@ -20,3 +20,6 @@ eureka:
       enabled: true
     lease:
       duration: 5
+management:
+  security:
+    enabled: false
