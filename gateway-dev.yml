@@ -1,8 +1,18 @@
 server:
     port: 9000
-orderserviceuri: http://localhost:9200
-customerserviceuri: http://localhost:9100
 eureka:
     client:
         service-url:
             defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: customerroute
+        uri: lb://customerservice
+        predicates:
+        - Path=/order/**
+      - id: orderroute
+        uri: lb://orderservice
+        predicates:
+        - Path=/customer/**
