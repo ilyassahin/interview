@@ -1,6 +1,8 @@
 package com.interview.orderservice.adapter;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,16 +12,18 @@ import com.interview.orderservice.dto.CheckCreditLimitResponseDTO;
 @Service
 public class CustomerServiceAdapter {
 
-	@Value("${customerserviceuri}")
-	private String customerServiceUri;
+	private String customerServiceUri = "http://customerservice/customer/checkCreditLimit";
 	
-	private RestTemplate restTemplate;
+    @Autowired
+    RestTemplate restTemplate;
 	
-	public CustomerServiceAdapter() {
-		restTemplate = new RestTemplate();
-	}
-
 	public CheckCreditLimitResponseDTO checkCreditLimit(CheckCreditLimitRequestDTO requestDTO) {
 		return restTemplate.postForObject(customerServiceUri, requestDTO, CheckCreditLimitResponseDTO.class);
 	}
+	
+	@Bean
+    @LoadBalanced
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 }
