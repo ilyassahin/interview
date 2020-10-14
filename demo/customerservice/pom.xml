@@ -41,7 +41,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -67,6 +66,11 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
+		<dependency>
+			    <groupId>io.eventuate.tram.sagas</groupId>
+			    <artifactId>eventuate-tram-sagas-orchestration</artifactId>
+			    <version>0.13.0.RELEASE</version>
+			</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -106,5 +110,18 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo1.maven.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>miilestone</id>
+			<name>Spring Lib Milestone Repository</name>
+			<url>https://repo.spring.io/libs-milestone/</url>
+		</repository>
+	</repositories>
 
 </project>
