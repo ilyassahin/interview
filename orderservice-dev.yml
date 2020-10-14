@@ -11,6 +11,16 @@ spring:
             enabled: true
 customerserviceuri: http://localhost:9100/customer/checkCreditLimit
 eureka:
-    client:
-        service-url:
-            defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+management:
+  security:
+    enabled: false
