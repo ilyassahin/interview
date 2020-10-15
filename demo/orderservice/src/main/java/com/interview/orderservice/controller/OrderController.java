@@ -17,18 +17,21 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 
 import com.interview.orderservice.adapter.CustomerServiceAdapter;
-import com.interview.orderservice.constant.State;
 import com.interview.orderservice.dto.CheckCreditLimitRequestDTO;
 import com.interview.orderservice.dto.CheckCreditLimitResponseDTO;
 import com.interview.orderservice.dto.SaveOrderRequestDTO;
 import com.interview.orderservice.dto.SaveOrderResponseDTO;
-import com.interview.orderservice.entity.Orderr;
+import com.interview.orderservice.entity.Order;
+import com.interview.orderservice.enums.OrderState;
+import com.interview.orderservice.enums.State;
 import com.interview.orderservice.repository.OrderRepository;
 
 @RestController
 @RequestMapping("/order")
 public class OrderController {
 
+	
+	
 	@Autowired
 	OrderRepository orderRepository;
 
@@ -44,8 +47,8 @@ public class OrderController {
 		log.info("save order consumed!");
 		SaveOrderResponseDTO responseDTO = new SaveOrderResponseDTO();
 
-		Orderr order = new Orderr();
-		order.setState(State.PENDING);
+		Order order = new Order();
+		order.setOrderState(OrderState.PENDING);
 		order.setAmount(orderDto.getAmount());
 		order.setCustomerId(orderDto.getCustomerId());
 		orderRepository.save(order);
@@ -56,13 +59,13 @@ public class OrderController {
 		CheckCreditLimitResponseDTO creditLimitResponseDTO = customerServiceAdapter.checkCreditLimit(requestDTO);
 
 		if (State.SUCCESS.equals(creditLimitResponseDTO.getState())) {
-			order.setState(State.APPROVED);
+			order.setOrderState(OrderState.APPROVED);
 			orderRepository.save(order);
-			responseDTO.setState(order.getState());
+			responseDTO.setOrderState(order.getOrderState());
 		} else {
-			order.setState(State.REJECTED);
-			order.setRejectionReason(creditLimitResponseDTO.getDetail());
-			responseDTO.setState(order.getState());
+			order.setOrderState(OrderState.REJECTED);
+			order.setRejectionReason(creditLimitResponseDTO.getRejectionReason());
+			responseDTO.setOrderState(order.getOrderState());
 			responseDTO.setRejectionReason(order.getRejectionReason());
 		}
 
@@ -70,13 +73,13 @@ public class OrderController {
 	}
 
 	@GetMapping("/getOrderById")
-	public Orderr getOrderById(@RequestParam Long orderId) {
-		Optional<Orderr> op = orderRepository.findById(orderId);
+	public Order getOrderById(@RequestParam Long orderId) {
+		Optional<Order> op = orderRepository.findById(orderId);
 		return op.isPresent() ? op.get() : null;
 	}
 
 	@GetMapping("/getOrderByCustomerId")
-	public List<Orderr> getOrdersByCustomerId(@RequestParam Long customerId) {
+	public List<Order> getOrdersByCustomerId(@RequestParam Long customerId) {
 		return orderRepository.findByCustomerId(customerId);
 	}
 }

@@ -18,9 +18,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.interview.orderservice.adapter.CustomerServiceAdapter;
-import com.interview.orderservice.constant.Detail;
-import com.interview.orderservice.constant.State;
 import com.interview.orderservice.dto.CheckCreditLimitResponseDTO;
+import com.interview.orderservice.enums.RejectionReason;
+import com.interview.orderservice.enums.State;
 import com.interview.orderservice.repository.OrderRepository;
 
 public class OrderControllerTest {
@@ -59,7 +59,7 @@ public class OrderControllerTest {
 		MockHttpServletResponse response = result.getResponse();
 		String responseMessage = response.getContentAsString();
 		
-		assertThat(responseMessage).isEqualTo("{\"state\":\"APPROVED\"}");
+		assertThat(responseMessage).isEqualTo("{\"orderState\":\"APPROVED\"}");
 
 	}
 	
@@ -70,7 +70,7 @@ public class OrderControllerTest {
 		
 		CheckCreditLimitResponseDTO checkCreditLimitResponseDTO = new CheckCreditLimitResponseDTO();
 		checkCreditLimitResponseDTO.setState(State.FAIL);
-		checkCreditLimitResponseDTO.setDetail(Detail.INSUFFICIENT_CREDIT);
+		checkCreditLimitResponseDTO.setRejectionReason(RejectionReason.INSUFFICIENT_CREDIT);
 		when(customerServiceAdapter.checkCreditLimit(Mockito.any())).thenReturn(checkCreditLimitResponseDTO);
 		
 		MvcResult result = mvc
@@ -80,7 +80,7 @@ public class OrderControllerTest {
 		MockHttpServletResponse response = result.getResponse();
 		String responseMessage = response.getContentAsString();
 		
-		assertThat(responseMessage).isEqualTo("{\"state\":\"REJECTED\",\"rejectionReason\":\"INSUFFICIENT_CREDIT\"}");
+		assertThat(responseMessage).isEqualTo("{\"orderState\":\"REJECTED\",\"rejectionReason\":\"INSUFFICIENT_CREDIT\"}");
 
 	}
 		
