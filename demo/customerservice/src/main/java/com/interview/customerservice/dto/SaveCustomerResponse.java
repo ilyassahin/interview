@@ -5,7 +5,7 @@ import com.interview.customerservice.enums.State;
 import lombok.Data;
 
 @Data
-public class SaveCustomerResponseDTO {
+public class SaveCustomerResponse {
 	
 	private State state;
 	private long customerId;

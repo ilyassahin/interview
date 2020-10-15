@@ -1,7 +1,5 @@
 package com.interview.customerservice.controller;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,69 +13,43 @@ import org.springframework.web.bind.annotation.RestController;
 import com.interview.customerservice.dto.CheckCreditLimitRequestDTO;
 import com.interview.customerservice.dto.CheckCreditLimitResponseDTO;
 import com.interview.customerservice.dto.CustomerDTO;
-import com.interview.customerservice.dto.SaveCustomerResponseDTO;
-import com.interview.customerservice.entity.Customer;
-import com.interview.customerservice.enums.RejectionReason;
+import com.interview.customerservice.dto.SaveCustomerResponse;
 import com.interview.customerservice.enums.State;
-import com.interview.customerservice.repository.CustomerRepository;
+import com.interview.customerservice.service.CustomerService;
 
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
 
-	@Autowired
-	CustomerRepository customerRepository;
-
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@PostMapping("/save")
-	public SaveCustomerResponseDTO saveCustomer(@RequestBody CustomerDTO customerDTO) {
+	@Autowired
+	CustomerService customerService;
 
-		SaveCustomerResponseDTO responseDTO = new SaveCustomerResponseDTO();
+	@PostMapping("/save")
+	public SaveCustomerResponse saveCustomer(@RequestBody CustomerDTO customerDTO) {
+
+		SaveCustomerResponse response = new SaveCustomerResponse();
 		try {
-			Customer customer = new Customer();
-			customer.setName(customerDTO.getName());
-			customer.setCreditLimit(customerDTO.getCreditLimit());
-			customer.setCreditReservation(customerDTO.getCreditReservation());
-			customerRepository.save(customer);
-			responseDTO.setState(State.SUCCESS);
-			responseDTO.setCustomerId(customer.getId());
-			log.info("Customer saved!, ID: {}", customer.getId());
+			long id = customerService.saveCustomer(customerDTO);
+			log.info("Customer saved!, ID: {}", id);
+			response.setCustomerId(id);
+			response.setState(State.SUCCESS);
 		} catch (Exception e) {
-			responseDTO.setState(State.FAIL);
+			response.setState(State.FAIL);
 			log.error(e.getMessage());
 		}
-		return responseDTO;
+		return response;
 	}
 
 	@PostMapping("/checkCreditLimit")
 	public CheckCreditLimitResponseDTO checkCreditLimit(@RequestBody CheckCreditLimitRequestDTO requestDTO) {
-
-		Optional<Customer> op = customerRepository.findById(requestDTO.getCustomerId());
-		CheckCreditLimitResponseDTO responseDTO = new CheckCreditLimitResponseDTO();
-
-		if (op.isPresent()) {
-			Customer customer = op.get();
-			if (customer.getCreditLimit() >= requestDTO.getAmount()) {
-				customer.setCreditLimit(customer.getCreditLimit() - requestDTO.getAmount());
-				customer.setCreditReservation(customer.getCreditReservation() + requestDTO.getAmount());
-				customerRepository.save(customer);
-				responseDTO.setState(State.SUCCESS);
-			} else {
-				responseDTO.setState(State.FAIL);
-				responseDTO.setRejectionReason(RejectionReason.INSUFFICIENT_CREDIT);
-			}
-		} else {
-			responseDTO.setState(State.FAIL);
-			responseDTO.setRejectionReason(RejectionReason.UNKNOWN_CUSTOMER);
-		}
-		return responseDTO;
+		return customerService.checkCreditLimit(requestDTO);
 	}
 
 	@GetMapping("/getCustomerById")
-	public Customer getCustomerById(@RequestParam Long customerId) {
-		Optional<Customer> op = customerRepository.findById(customerId);
-		return op.isPresent() ? op.get() : null;
+	public CustomerDTO getCustomerById(@RequestParam Long customerId) {
+		return customerService.getCustomerById(customerId);
 	}
 
 }

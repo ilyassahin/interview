@@ -9,9 +9,11 @@ import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,7 +22,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.interview.customerservice.entity.Customer;
 import com.interview.customerservice.repository.CustomerRepository;
+import com.interview.customerservice.service.CustomerService;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CustomerControllerTest {
 	
 	@InjectMocks
@@ -28,6 +32,9 @@ public class CustomerControllerTest {
 	
 	@Mock
 	CustomerRepository customerRepository;
+	
+	@Mock
+	CustomerService customerService;
 
 	private MockMvc mvc;
 	
