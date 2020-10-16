@@ -9,7 +9,6 @@ spring:
     h2:
         console:
             enabled: true
-customerserviceuri: http://localhost:9100/customer/checkCreditLimit
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
