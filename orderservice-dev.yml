@@ -9,7 +9,17 @@ spring:
     h2:
         console:
             enabled: true
-customerserviceuri: http://localhost:9100/customer/checkCreditLimit
+    kafka:
+        consumer:
+            bootstrap-servers: kafkaserver:9092
+            group-id: orderservice
+            auto-offset-reset: earliest
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        producer:
+            bootstrap-servers: kafkaserver:9092
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.apache.kafka.common.serialization.StringSerializer
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
