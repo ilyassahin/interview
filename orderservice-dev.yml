@@ -9,7 +9,6 @@ spring:
     h2:
         console:
             enabled: true
-<<<<<<< HEAD
     kafka:
         consumer:
             bootstrap-servers: kafkaserver:9092
@@ -21,8 +20,6 @@ spring:
             bootstrap-servers: kafkaserver:9092
             key-serializer: org.apache.kafka.common.serialization.StringSerializer
             value-serializer: org.apache.kafka.common.serialization.StringSerializer
-=======
->>>>>>> branch 'master' of git@github.com:ilyassahin/interview.git
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
