@@ -10,10 +10,12 @@ For accessing and testing webservices easily "interview.postman_collection.json"
 
 Project meets this requirement.
 
-* spring based microservices and cloud architecture. (Gateway / Config-Server )
+* spring based microservices and cloud architecture. (Gateway / Config-Server / Discovery-Server )
 * Docker with compose deploy
 * Swagger
 * Lombok
 * H2 - JPA
 * Unit tests
 * Clear sonarqube scan
+* Saga impl with kafka usage
+* service layer 
