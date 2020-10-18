@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.interview.orderservice.adapter.CustomerServiceAdapter;
 import com.interview.orderservice.dto.OrderDTO;
