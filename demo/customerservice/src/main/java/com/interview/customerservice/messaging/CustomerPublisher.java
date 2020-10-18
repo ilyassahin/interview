@@ -12,7 +12,7 @@ import com.interview.customerservice.port.ICustomerPublisher;
 @Service
 public class CustomerPublisher implements ICustomerPublisher {
 
-    private final static String TOPIC_ORDER_CALLBACK ="orderservicecallback";
+    private static final String TOPIC_ORDER_CALLBACK ="orderservicecallback";
 
     @Autowired
     private ObjectMapper objectMapper;

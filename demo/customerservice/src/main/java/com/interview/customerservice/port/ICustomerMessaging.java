@@ -2,10 +2,10 @@ package com.interview.customerservice.port;
 
 import org.springframework.kafka.annotation.KafkaListener;
 
+import com.interview.customerservice.constant.KafkaTopic;
+
 public interface ICustomerMessaging{
 
-    public static final String TOPIC_DELIVERY="orderservice";
-
-    @KafkaListener(topics = TOPIC_DELIVERY)
+    @KafkaListener(topics = KafkaTopic.TOPIC_DELIVERY)
     void consumeMessage(String content);
 }

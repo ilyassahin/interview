@@ -59,6 +59,7 @@ public class CustomerConsumer implements ICustomerMessaging {
 
 		} catch (IOException | InterruptedException e) {
 			logger.error(e.getMessage(), e);
+			Thread.currentThread().interrupt();
 		}
 
 	}
