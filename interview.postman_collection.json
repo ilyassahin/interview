@@ -20,12 +20,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/order/save",
+					"raw": "http://localhost:9999/order/save",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "9999",
 					"path": [
 						"order",
 						"save"
@@ -40,12 +40,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/order/getOrderById?orderId=1",
+					"raw": "http://localhost:9999/order/getOrderById?orderId=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "9999",
 					"path": [
 						"order",
 						"getOrderById"
@@ -75,12 +75,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9000/customer/save",
+					"raw": "http://localhost:9999/customer/save",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "9999",
 					"path": [
 						"customer",
 						"save"
@@ -95,12 +95,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9000/customer/getCustomerById?customerId=1",
+					"raw": "http://localhost:9999/customer/getCustomerById?customerId=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "9000",
+					"port": "9999",
 					"path": [
 						"customer",
 						"getCustomerById"
