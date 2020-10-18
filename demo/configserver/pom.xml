@@ -75,6 +75,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<defaultGoal>package docker:build</defaultGoal>
 	</build>
 
 </project>

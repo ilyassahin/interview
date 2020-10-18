@@ -14,7 +14,7 @@ services:
   gateway:
     image: gateway
     ports:
-      - "9300:9300"
+      - "9999:9999"
     depends_on:
       - configserver
       - discoveryserver
